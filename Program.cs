@@ -4,34 +4,31 @@ class Program
 {
     static void Main(string[] args)
     {
-        int[,] arr = { { 7, 3, 2 },
-                       { 4, 9, 6 },
-                       { 1, 8, 5 } };
+        int[,] arr = { { 7, 3, 2, 10 },
+                       { 4, 9, 6, 11 },
+                       { 1, 8, 5, 12 } };
 
-        List<int> nums = GetList(arr);
-        
-        nums.Sort();
+        Console.WriteLine("Исходный массив:");
+        Show2DArray(arr);
 
-        WriteToArray(arr, nums);
+        Sort2DArray(arr);
 
-        ShowArray(arr);
+        Console.WriteLine("Массив после сортировки:");
+        Show2DArray(arr);
     }
 
-    static List<int> GetList(int[,] array)
+    
+    static void Sort2DArray(int[,] arr)
     {
-        List<int> list = new List<int>();
-        for (int i = 0; i < array.GetLength(0); i++)
-        {
-            for (int j = 0; j < array.GetLength(1); j++)
-            {
-                list.Add(array[i, j]);
-            }
-        }
-        return list;
-    }
-    static int[,] WriteToArray(int[,] arr, List<int> list)
-    {        
-        int count = 0;
+        // Так как массивы передаются по ссылке, возвращать значение не нужно. 
+        // Работаем непосредственно с переданным массивом.
+
+        List<int> list = [.. arr]; // считываем все содержимое массива в список
+
+        list.Sort(); // Сортируем по порядку.
+
+        // записываем по порядку содержимое списка в массив
+        int count = 0;        
         for (int i = 0; i < arr.GetLength(0); i++)
         {
             for (int j = 0; j < arr.GetLength(1); j++)
@@ -39,10 +36,9 @@ class Program
                 arr[i, j] = list[count++];
             }
         }
-        return arr;
     }
 
-    static void ShowArray(int[,] arr)
+    static void Show2DArray(int[,] arr) // Вывод двумерного массива на консоль
     {
         for (int i = 0; i < arr.GetLength(0); i++)
         {
